@@ -38,6 +38,10 @@
     return [self initWithItemName:@"Item"];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed: %@", self);
+}
+
 - (instancetype)initWithItemName:(NSString *)name
                   valueInDollars:(int)value
                     serialNumber:(NSString *)sNumber {
@@ -62,6 +66,23 @@
     return [self initWithItemName:name
                    valueInDollars:0
                      serialNumber:sNumber];
+}
+
+- (void)setContainedItem:(BNRItem *)item {
+    _containedItem = item;
+    item.container = self;
+}
+
+- (BNRItem *)containedItem {
+    return _containedItem;
+}
+
+- (void)setContainer:(BNRItem *)item {
+    _container = item;
+}
+
+- (BNRItem *)container {
+    return _container;
 }
 
 - (void)setItemName:(NSString *)str {
